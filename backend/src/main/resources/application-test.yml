@@ -1,0 +1,93 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: dems-backend-test
+
+  datasource:
+    url: jdbc:h2:mem:dems_test;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    open-in-view: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 1
+
+  flyway:
+    enabled: false
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+
+app:
+  security:
+    jwt:
+      secret: test-secret-key-must-be-at-least-32-characters-long-for-jwt
+      access-token-expiration-ms: 300000
+      refresh-token-expiration-ms: 86400000
+      issuer: dems-test
+
+    aes:
+      secret-key: test-32-byte-aes-256-secret-key!!
+      salt: test-16-byte-salt
+
+  minio:
+    endpoint: http://localhost:9000
+    access-key: testminio
+    secret-key: testminio123
+    bucket-name: dems-test-documents
+    secure: false
+
+  ai:
+    base-url: http://localhost:8001
+    timeout-ms: 5000
+    api-key: test-api-key
+
+  document:
+    allowed-extensions:
+      - pdf
+      - doc
+      - docx
+      - txt
+      - png
+      - jpg
+      - jpeg
+      - csv
+    max-size-bytes: 52428800
+
+  sharing:
+    default-expiry-hours: 24
+    max-expiry-hours: 168
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+logging:
+  level:
+    root: WARN
+    com.dems: INFO

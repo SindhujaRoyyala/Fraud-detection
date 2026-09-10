@@ -1,0 +1,345 @@
+Redesign my existing Secure Digital Evidence Management System frontend into a premium, modern legal/investigation SaaS dashboard.
+
+IMPORTANT:
+- Do NOT create a generic dashboard.
+- Do NOT use the FlowFunds name, logo, text, or business content.
+- Use the attached reference image ONLY as visual inspiration for layout, spacing, hierarchy, card styling, typography, glassmorphism, and overall visual quality.
+- Keep the purpose of my application: secure digital evidence/document management for legal and investigation teams.
+- The result should look like a real production-ready enterprise product suitable for a Smart India Hackathon 2026 presentation.
+- Prioritize usability, professionalism, security, and visual polish over excessive decoration.
+
+REFERENCE VISUAL STYLE:
+Create a layout strongly inspired by the reference image:
+- Minimal premium SaaS aesthetic
+- Very light warm-gray/off-white background
+- White translucent/glass cards
+- Deep forest green as the primary accent
+- Very dark charcoal text
+- Subtle gray borders
+- Large editorial-style page heading
+- Generous whitespace
+- Rounded corners
+- Soft shadows
+- Thin dividers
+- Compact top navigation
+- Dense but clean dashboard information
+- Elegant typography
+- Subtle background imagery/abstract security texture where appropriate
+- Avoid a traditional boring admin-panel appearance
+
+APPLICATION BRAND:
+Name: Secure Investigation Vault
+Short description: Secure digital evidence management for legal and investigation teams.
+
+PRIMARY NAVIGATION:
+Create a clean horizontal/compact navigation containing:
+- Home / Dashboard
+- Cases
+- Evidence
+- Documents
+- Upload
+- Audit Trail
+- Reports
+- Users
+- Settings
+
+HEADER:
+Create a premium minimal header:
+- Secure Investigation Vault logo on the left
+- Navigation in the center
+- Search button/input
+- Notification icon
+- Security/status indicator
+- User profile/avatar on the right
+- Use simple line icons
+- Keep the header compact and elegant
+
+DASHBOARD:
+Create the main dashboard using the visual structure of the reference image.
+
+Hero section:
+Large heading:
+"Today's Investigation Priorities"
+
+Supporting text:
+"Review critical evidence, case activity, deadlines and security events that need your attention."
+
+Add a subtle abstract dark-green security/evidence visual in the hero background, inspired by the large curved visual in the reference image.
+
+Add date selector and case filter near the top-right.
+
+STATISTICS CARDS:
+Create four compact premium cards:
+1. Active Cases
+2. Evidence Items
+3. Pending Reviews
+4. Security Alerts
+
+Example values:
+24 Active Cases
+1,248 Evidence Items
+17 Pending Reviews
+3 Security Alerts
+
+Each card should include:
+- Large number
+- Small descriptive label
+- Small trend/status indicator
+- Minimal icon
+- Subtle hover animation
+
+MAIN DASHBOARD CONTENT:
+Below the statistics, create a responsive multi-column layout.
+
+LEFT PANEL:
+"Needs Attention"
+
+Show investigation tasks such as:
+- Evidence verification required
+- New evidence uploaded
+- Chain of custody review
+- Case document awaiting approval
+- Security alert requires review
+
+Each item should have:
+- Status badge
+- Case ID
+- Short description
+- Timestamp
+- Priority indicator
+
+CENTER PANEL:
+"Investigation Timeline"
+
+Create a visually attractive timeline showing:
+- Evidence uploaded
+- Evidence verified
+- Evidence transferred
+- Document reviewed
+- Chain of custody updated
+- Report generated
+
+Use subtle connecting lines and compact event cards.
+
+RIGHT PANEL:
+"Investigation AI Assistant"
+
+Create a modern AI assistant card.
+
+Example:
+"AI Investigation Assistant"
+
+Show:
+- Case summary
+- Evidence requiring attention
+- Potential missing information
+- Recent activity
+- Overall risk level
+
+Include a compact input:
+"Ask about a case or evidence..."
+
+The AI panel should feel useful and professional rather than like a generic chatbot.
+
+EVIDENCE PAGE:
+Create a separate Evidence Management page using the same design system.
+
+Include:
+- Search evidence
+- Filter by case
+- Filter by evidence type
+- Filter by verification status
+- Filter by date
+- Upload Evidence button
+
+Display evidence as premium cards/table rows containing:
+- Evidence ID
+- Evidence type
+- Case ID
+- Uploaded by
+- Upload date
+- Verification status
+- Chain-of-custody status
+- Security classification
+- Actions
+
+Use statuses:
+Verified
+Pending
+Under Review
+Flagged
+
+CASE PAGE:
+Create a Cases page.
+
+Each case card should display:
+- Case ID
+- Case name
+- Case type
+- Assigned investigator
+- Number of evidence items
+- Last activity
+- Case status
+- Priority
+
+Include:
+Active
+Under Investigation
+Review
+Closed
+
+EVIDENCE DETAILS PAGE:
+Create a detailed evidence screen.
+
+Show:
+- Evidence preview
+- Evidence ID
+- Case ID
+- Evidence type
+- Hash value
+- Upload timestamp
+- Uploaded by
+- Current custodian
+- Verification status
+- Integrity status
+
+Create a beautiful "Chain of Custody" timeline showing every transfer/access event.
+
+Example:
+Evidence uploaded
+↓
+Evidence verified
+↓
+Transferred to Investigator
+↓
+Accessed for review
+↓
+Transferred to Legal Team
+
+Make the chain-of-custody section highly polished because it is an important feature of the application.
+
+UPLOAD PAGE:
+Create a modern drag-and-drop evidence upload interface.
+
+Large central upload area:
+"Drop evidence here"
+
+Supporting text:
+"Upload documents, images, videos, audio and other investigation files securely."
+
+Include:
+- Browse Files button
+- File type information
+- File size information
+- Encryption indicator
+- Automatic hash generation indicator
+- Integrity verification indicator
+
+Show an upload progress animation.
+
+AUDIT TRAIL:
+Create an Audit Trail page.
+
+Display:
+- Timestamp
+- User
+- Action
+- Evidence/Case
+- IP/device information
+- Result
+
+Use a clean chronological timeline/table.
+
+REPORTS:
+Create a Reports page with:
+- Case activity
+- Evidence statistics
+- Verification statistics
+- Chain-of-custody events
+- Security events
+- Export report button
+
+VISUAL DESIGN SYSTEM:
+
+Colors:
+- Background: #F4F5F2
+- Primary: deep forest green
+- Secondary: muted sage green
+- Text: #151816
+- Secondary text: #6B726D
+- Cards: white with slight transparency
+- Borders: very subtle gray
+- Warning: muted amber
+- Error: muted red
+- Success: muted green
+
+Do not make the entire interface dark.
+
+TYPOGRAPHY:
+Use a modern premium sans-serif font.
+Use:
+- Large bold editorial heading for page titles
+- Medium-weight section headings
+- Small uppercase labels where appropriate
+- Clear readable body text
+- Strong visual hierarchy
+
+CARDS:
+- 14–20px border radius
+- Very subtle border
+- Soft shadow
+- White/transparent surface
+- Comfortable padding
+- Clean alignment
+- Avoid excessive shadows
+
+ICONS:
+Use minimal modern line icons.
+Prefer Lucide-style icons.
+Do not use random emoji as interface icons.
+
+ANIMATIONS:
+Add subtle professional animations:
+- Cards fade and slide in when the page loads
+- Statistics numbers animate upward
+- Buttons have smooth hover transitions
+- Cards slightly lift on hover
+- Navigation has smooth active-state transitions
+- Timeline events animate into view
+- Upload area has drag-over animation
+- Modals smoothly fade/scale
+- AI assistant responses appear smoothly
+- Loading states use elegant skeleton animations
+
+IMPORTANT:
+Animations must be subtle and professional.
+Do NOT use excessive bouncing, spinning, flashing, or distracting animations.
+
+RESPONSIVE DESIGN:
+Make the entire application responsive for:
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+On smaller screens:
+- Convert navigation into a mobile menu
+- Stack dashboard panels
+- Make tables horizontally scrollable or convert them to cards
+- Preserve readability and spacing
+
+DESIGN CONSISTENCY:
+Create one reusable design system across every page:
+- Same header
+- Same navigation
+- Same card style
+- Same buttons
+- Same badges
+- Same typography
+- Same spacing
+- Same animations
+- Same colors
+
+The final result should feel like a premium product similar in visual quality to Linear, Notion, modern fintech SaaS products, and high-end legal technology platforms, while retaining the specific visual inspiration of the supplied reference image.
+
+Make the dashboard the strongest and most visually impressive page because it will be demonstrated during the SIH 2026 presentation.

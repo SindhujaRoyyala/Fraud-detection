@@ -1,0 +1,138 @@
+# ============================================================
+# LOCAL DEVELOPMENT PROFILE
+# Use: java -jar dems-backend-1.0.0.jar --spring.profiles.active=local
+#
+# Prerequisites (local machine, no Docker):
+#   - PostgreSQL 17 running on localhost:5432
+#   - Database 'dems_db' created (see README for setup commands)
+#   - Redis is OPTIONAL — the app starts without it (token
+#     revocation will be silently skipped)
+# ============================================================
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dems-backend-local
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/dems_db
+    username: dems_user
+    password: StrongPassword123!
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 10000
+      initialization-fail-timeout: 10000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        default_schema: public
+    open-in-view: false
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      # Short timeout so startup doesn't hang if Redis is absent
+      timeout: 2000ms
+      connect-timeout: 2000ms
+      lettuce:
+        pool:
+          max-active: 5
+          max-idle: 3
+          min-idle: 0
+          # Return immediately if pool exhausted rather than blocking
+          max-wait: 1000ms
+
+  flyway:
+    enabled: false
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    baseline-version: 0
+    placeholder-replacement: false
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+app:
+  security:
+    jwt:
+      secret: local-dev-secret-key-must-be-at-least-32-characters-long
+      access-token-expiration-ms: 900000
+      refresh-token-expiration-ms: 604800000
+      issuer: dems-local
+
+    aes:
+      secret-key: local-32-byte-aes-256-secret-key!!
+      salt: local-16-byte-sa
+
+  # Redis is optional — gracefully degrades when unavailable
+  redis:
+    optional: true
+
+  minio:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin123
+    bucket-name: dems-documents-local
+    secure: false
+
+  ai:
+    base-url: http://localhost:8000
+    timeout-ms: 5000
+    api-key: local-dev-api-key
+
+  document:
+    allowed-extensions:
+      - pdf
+      - doc
+      - docx
+      - txt
+      - png
+      - jpg
+      - jpeg
+      - csv
+    max-size-bytes: 104857600
+
+  sharing:
+    default-expiry-hours: 72
+    max-expiry-hours: 720
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+logging:
+  level:
+    root: INFO
+    com.dems: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: false
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

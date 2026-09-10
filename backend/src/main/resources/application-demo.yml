@@ -1,0 +1,125 @@
+# ============================================================
+# DEMO PROFILE — runs with H2 in-memory database
+# No PostgreSQL, Redis, or MinIO required.
+# Use when Docker / external services are not available.
+# ============================================================
+
+server:
+  port: 8081s
+
+spring:
+  application:
+    name: dems-backend-demo
+
+  datasource:
+    url: jdbc:h2:mem:dems_demo;DB_CLOSE_DELAY=-1;MODE=PostgreSQL;NON_KEYWORDS=USER
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+    open-in-view: false
+
+  # H2 console (optional - access at /h2-console)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      timeout: 500ms
+      connect-timeout: 500ms
+      lettuce:
+        pool:
+          max-active: 2
+          max-idle: 1
+          min-idle: 0
+          max-wait: 200ms
+
+  flyway:
+    enabled: false
+
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  jackson:
+    date-format: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    time-zone: UTC
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+
+app:
+  security:
+    jwt:
+      secret: demo-secret-key-must-be-at-least-32-characters-long
+      access-token-expiration-ms: 3600000
+      refresh-token-expiration-ms: 604800000
+      issuer: dems-demo
+
+    aes:
+      secret-key: demo-32-byte-aes-256-secret-key!!
+      salt: demo-16-byte-sa
+
+  redis:
+    optional: true
+
+  minio:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin123
+    bucket-name: dems-demo-documents
+    secure: false
+
+  ai:
+    base-url: http://localhost:8000
+    timeout-ms: 3000
+    api-key: demo-api-key
+
+  document:
+    allowed-extensions:
+      - pdf
+      - doc
+      - docx
+      - txt
+      - png
+      - jpg
+      - jpeg
+      - csv
+    max-size-bytes: 104857600
+
+  sharing:
+    default-expiry-hours: 72
+    max-expiry-hours: 720
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operations-sorter: method
+    tags-sorter: alpha
+
+logging:
+  level:
+    root: WARN
+    com.dems: INFO
+    org.springframework.security: WARN
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

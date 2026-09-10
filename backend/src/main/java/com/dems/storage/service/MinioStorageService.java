@@ -53,12 +53,21 @@ public class MinioStorageService {
                 log.info("MinIO bucket exists: {}", bucketName);
             }
         } catch (Exception e) {
-            log.error("Failed to initialize MinIO client: {}", e.getMessage());
+            minioClient = null;
+            log.warn("MinIO is unavailable at {}. Storage-backed features will be disabled until MinIO is running. {}", endpoint, e.getMessage());
+        }
+    }
+
+    private void ensureClientAvailable() {
+        if (minioClient == null) {
+            throw new ApiException("Storage service is unavailable. Start MinIO or configure the backend to the running MinIO endpoint.",
+                    HttpStatus.SERVICE_UNAVAILABLE, "STORAGE_UNAVAILABLE");
         }
     }
 
     public void uploadFile(String objectKey, InputStream inputStream, long size, String contentType) {
         try {
+            ensureClientAvailable();
             minioClient.putObject(PutObjectArgs.builder()
                     .bucket(bucketName)
                     .object(objectKey)
@@ -74,6 +83,7 @@ public class MinioStorageService {
 
     public InputStream downloadFile(String objectKey) {
         try {
+            ensureClientAvailable();
             return minioClient.getObject(GetObjectArgs.builder()
                     .bucket(bucketName)
                     .object(objectKey)
@@ -86,6 +96,7 @@ public class MinioStorageService {
 
     public void deleteFile(String objectKey) {
         try {
+            ensureClientAvailable();
             minioClient.removeObject(RemoveObjectArgs.builder()
                     .bucket(bucketName)
                     .object(objectKey)
@@ -99,6 +110,7 @@ public class MinioStorageService {
 
     public boolean fileExists(String objectKey) {
         try {
+            ensureClientAvailable();
             minioClient.statObject(StatObjectArgs.builder()
                     .bucket(bucketName)
                     .object(objectKey)
@@ -111,6 +123,7 @@ public class MinioStorageService {
 
     public String generatePresignedDownloadUrl(String objectKey, long expiryMinutes) {
         try {
+            ensureClientAvailable();
             return minioClient.getPresignedObjectUrl(GetPresignedObjectUrlArgs.builder()
                     .method(Method.GET)
                     .bucket(bucketName)

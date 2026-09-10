@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { api, getStoredAuthSession, clearStoredAuthSession } from "../lib/api";
 import {
   Shield, FolderOpen, Upload, ClipboardList, BarChart3, Users, Settings,
   Bell, Search, ChevronRight, AlertTriangle, CheckCircle2, Clock,
@@ -213,14 +214,14 @@ function LoginScreen({ onLogin }: { onLogin: (user: { username?: string; email?:
     try {
       const username = mode === "register" ? (fullName.trim() || email.split("@")[0]) : email.trim();
       const result = mode === "login"
-        ? await import("../lib/api").then(({ api }) => api.auth.login({ username, password }))
-        : await import("../lib/api").then(({ api }) => api.auth.register({
+        ? await api.auth.login({ username, password })
+        : await api.auth.register({
             username,
             email: email.trim(),
             password,
             fullName: fullName.trim(),
             role: "VIEWER",
-          }));
+          });
 
       const user = result?.user ?? { username, email: email.trim(), fullName: fullName.trim() };
       onLogin(user);
@@ -1607,12 +1608,9 @@ export default function App() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("dems_auth_session");
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (parsed?.accessToken) {
-          setAuthenticated(true);
-        }
+      const stored = getStoredAuthSession();
+      if (stored?.accessToken) {
+        setAuthenticated(true);
       }
     } catch {
       // ignore invalid local storage state
@@ -1639,7 +1637,7 @@ export default function App() {
               {page === "audit" && <AuditPage />}
               {page === "reports" && <ReportsPage />}
               {page === "users" && <UsersPage />}
-              {page === "settings" && <SettingsPage onLogout={async () => { setPage("dashboard"); setAuthenticated(false); await import("../lib/api").then(({ clearStoredAuthSession }) => clearStoredAuthSession()); }} />}
+              {page === "settings" && <SettingsPage onLogout={async () => { setPage("dashboard"); setAuthenticated(false); await api.auth.logout(); clearStoredAuthSession(); }} />}
             </PageTransition>
           </div>
         </>

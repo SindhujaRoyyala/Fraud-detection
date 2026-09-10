@@ -19,3 +19,19 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+# PostgreSQL local data
+pgsql/data/
+
+# Logs
+*.log
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Java/Maven
+**/target/
+
+# Node
+**/node_modules/
